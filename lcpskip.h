@@ -1,6 +1,12 @@
 
 #define MAXHEIGHT 16
-#define PROB .5
+#define PROB .05
+
+// stats                                                                                                         
+extern int stat_lcp_cmps;
+extern int stat_cmps;
+extern int stat_chr_cmps;
+
 
 typedef struct _fwd {
   struct _node * ptr;
