@@ -28,8 +28,8 @@ int main( int argc, char **argv ) {
   stat_chr_cmps=0;
 
   for( i = 0; i < 100000; i++ ) {
-    s = malloc( 101 );
-    sprintf( s, "%100d", i );
+    s = malloc( 256 );
+    sprintf( s, "%255d", i );
     Insert( l, s, s );
   }
   printf( "%d string cmp calls %d chr cmps\n", stat_cmps, stat_chr_cmps );
@@ -39,9 +39,10 @@ int main( int argc, char **argv ) {
   stat_chr_cmps=0;
   stat_lcp_cmps=0;
 
+  s = malloc( 256 );
+
   for( i = 0; i < 100000; i++ ) {
-    s = malloc( 101 );
-    sprintf( s, "%100d", i );
+    sprintf( s, "%255d", i );
     t = Search( l, s );
 #ifndef NDEBUG
   printf( "%d string cmp calls %d chr cmps\n", stat_cmps, stat_chr_cmps );
@@ -50,7 +51,7 @@ int main( int argc, char **argv ) {
       cnt++;
   }
 
-  printf( "sample key:  %s\n", s );
+  //  printf( "sample key:  %s\n", s );
   printf( "%d matches\n", cnt );
   printf( "%d lcp tests %d string cmp calls %d chr cmps\n", stat_lcp_cmps, stat_cmps, stat_chr_cmps );
 }

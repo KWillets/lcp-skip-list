@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I. -O4 -DNDEBUG
+CFLAGS=-I. -O3 -DNDEBUG
 DEPS = lcpskip.h
 OBJ = test.o lcpskip.o 
 

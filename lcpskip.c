@@ -46,19 +46,27 @@ SkipList * mkList() {
 
 // strcmp with lcp length input/return
 // input lcp is start, output set to last cmp
-int strlcpcmp( char * s, char * t, int *lcp ) {
+inline int strlcpcmp( const char * s, const char * t, int *lcp ) {
   int i,r;
+
+  register unsigned char *ps;
+  register unsigned char *pt;
+
+  ps = (const unsigned char *) s + *lcp;
+  pt = (const unsigned char *) t + *lcp;
 
   // to test no lcp:  
   //return strcmp(s,t);
   INC(stat_cmps);
 
-  for( i = *lcp;  !(r= t[i] - s[i] ) && s[i]; i++ )
+  for( ;  *pt == *ps && *ps != '\0'; pt++, ps++ )
     INC(stat_chr_cmps);
+
+  r = *pt - *ps;
 
   INC( stat_chr_cmps );
 
-  *lcp = i;  // output new lcp
+  *lcp = ps - (unsigned char *) s;  // output new lcp
 
   return r;  // works w/ \0 etc.
 
